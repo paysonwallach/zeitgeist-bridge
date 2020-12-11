@@ -9,7 +9,7 @@ import sys
 EXECUTABLE_INSTALL_DIR = os.path.join(
     os.environ["DESTDIR"], os.environ["MESON_INSTALL_PREFIX"], "bin"
 )
-EXECUTABLE_NAME = "com.paysonwallach.synapse.web.connector"
+EXECUTABLE_NAME = "com.paysonwallach.synapse.bridge"
 MANIFEST_FILE_NAME = "com.paysonwallach.synapse.json"
 
 is_root = subprocess.run(["whoami"], capture_output=True) == "root"

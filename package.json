@@ -1,6 +1,6 @@
 {
-  "name": "zeitgeist-browser-connector",
-  "description": "Native host for browser extensions.",
+  "name": "zeitgeist-bridge",
+  "description": "Host bridge to Zeitgeist.",
   "license": "GPL-3.0",
   "author": "Payson Wallach <payson@paysonwallach.com>",
   "version": "0.1.0",
