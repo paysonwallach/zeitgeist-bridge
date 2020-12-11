@@ -1,7 +1,0 @@
-{
-  "name": "com.paysonwallach.zeitgeist.browser.connector",
-  "description": "",
-  "path": "@EXECUTABLE_PATH@",
-  "type": "stdio",
-  "allowed_extensions": [ "zeitgeist@paysonwallach.com" ]
-}

@@ -1,5 +1,5 @@
 project(
-  'com.paysonwallach.zeitgeist.browser.connector',
+  'com.paysonwallach.zeitgeist.bridge',
   'vala',
   'c',
   license: 'GPL-3.0',
@@ -10,7 +10,7 @@ project(
 vala = meson.get_compiler('vala')
 
 add_global_arguments(
-  ['-DG_LOG_DOMAIN="com.paysonwallach.zeitgeist.browser.connector"'],
+  ['-DG_LOG_DOMAIN="com.paysonwallach.zeitgeist.bridge"'],
   language:'c'
 )
 
