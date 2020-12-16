@@ -9,6 +9,8 @@ project(
 
 vala = meson.get_compiler('vala')
 
+vapi_dir = join_paths(meson.source_root(), 'vapi')
+
 add_global_arguments(
   ['-DG_LOG_DOMAIN="com.paysonwallach.zeitgeist.bridge"'],
   language:'c'
@@ -22,6 +24,19 @@ gio_unix_dep = dependency('gio-unix-2.0')
 zeitgeist_dep = dependency('zeitgeist-2.0')
 posix_dep = vala.find_library('posix')
 
+conf = configuration_data()
+conf.set_quoted('API_VERSION', 'v2')
+
+config_h = configure_file(
+output: 'config.h',
+  configuration: conf
+)
+
+config_dep = declare_dependency(
+  dependencies: vala.find_library('config', dirs: vapi_dir),
+  sources: config_h
+)
+
 executable(
   meson.project_name(),
   files(
@@ -31,6 +46,7 @@ executable(
     'src/Utils.vala'
   ),
   dependencies: [
+    config_dep,
     gee_dep,
     glib_dep,
     glib_json_dep,
