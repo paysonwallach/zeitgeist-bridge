@@ -42,8 +42,8 @@ executable(
   files(
     'src/ExtensionProxy.vala',
     'src/Main.vala',
-    'src/Message.vala',
-    'src/Utils.vala'
+    'src/Protocol.vala',
+    'src/Utils/Serializable.vala'
   ),
   dependencies: [
     config_dep,

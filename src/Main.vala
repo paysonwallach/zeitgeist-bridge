@@ -15,9 +15,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Zeitgeist.Web {
+namespace Zeitgeist.Bridge {
     public static LogWriterOutput log_writer_func (LogLevelFlags log_level, LogField[] fields) {
-        if (log_level > LogLevelFlags.LEVEL_INFO || Environment.get_variable ("G_MESSAGES_DEBUG") == "all")
+        if (Environment.get_variable ("G_MESSAGES_DEBUG") != "all" && log_level > LogLevelFlags.LEVEL_MESSAGE)
             return LogWriterOutput.UNHANDLED;
 
         GLib.Log.writer_journald (log_level, fields);
@@ -25,28 +25,8 @@ namespace Zeitgeist.Web {
         return LogWriterOutput.HANDLED;
     }
 
-    private string get_manifestation (string uri) {
-        var components = uri.split ("://", 2);
-
-        if (components[0] == "file")
-            return uri.substring (0, uri.last_index_of (Path.DIR_SEPARATOR_S) + 1);
-        else
-            return @"$(components[0])://$(components[1].split (Path.DIR_SEPARATOR_S)[0])/";
-    }
-
-    private string get_origin (string uri) {
-        var components = uri.split ("://", 2);
-
-        if (components[0] == "file")
-            return "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject";
-        else if (components[0] == "http" || components[0] == "https")
-            return "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#WebDataObject";
-        else
-            return "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#RemoteDataObject";
-    }
-
     public static int main (string[] args) {
-        GLib.Log.set_writer_func (Zeitgeist.Web.log_writer_func);
+        GLib.Log.set_writer_func (Zeitgeist.Bridge.log_writer_func);
         Intl.setlocale ();
 
         var log = new Zeitgeist.Log ();
@@ -63,25 +43,19 @@ namespace Zeitgeist.Web {
         var extension = new ExtensionProxy ();
 
         extension.message_received.connect ((body) => {
-            message (@"message received: $(body.data.url)");
-            var subject = new Zeitgeist.Subject.full (
-                body.data.url,
-                "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Website",
-                get_manifestation (body.data.url),
-                body.data.mime_type,
-                get_origin (body.data.url),
-                body.data.title,
-                "net");
-            var event = new Zeitgeist.Event.full (
-                "http://www.zeitgeist-project.com/ontologies/2010/01/27/zg#AccessEvent",
-                "http://www.zeitgeist-project.com/ontologies/2010/01/27/zg#UserActivity",
-                "application://firefox.desktop",
-                null,
-                subject);
-            event.timestamp = body.data.access_time;
+            var request = body as InsertEventsRequest;
 
-            log.insert_event.begin (event);
-            message ("inserting event...");
+            if (request == null)
+                return;
+
+            request.data.events.@foreach ((event) => {
+                try {
+                    log.insert_event_no_reply (event.to_zeitgeist ());
+                } catch (Error err) {
+                    warning (err.message);
+                }
+                info ("inserting event...");
+            });
         });
         extension.begin_listening.begin ();
 
