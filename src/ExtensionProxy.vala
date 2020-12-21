@@ -15,13 +15,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-private class Zeitgeist.Web.ExtensionProxy : Object {
+private class Zeitgeist.Bridge.ExtensionProxy : Object {
     private DataInputStream input_stream;
     private uint8[] message_length_buffer;
     private uint8[] message_content_buffer;
     private size_t message_length;
 
-    public signal void message_received (Message body);
+    public signal void message_received (InsertEventsRequest body);
 
     public ExtensionProxy () {
         var base_input_stream = new UnixInputStream (Posix.STDIN_FILENO, false);
@@ -43,7 +43,7 @@ private class Zeitgeist.Web.ExtensionProxy : Object {
 
             info (@"received message: $((string) message_content_buffer)");
             var message = Json.gobject_from_data (
-                typeof (Message), ((string) message_content_buffer).make_valid ((ssize_t) message_length)) as Message;
+                typeof (InsertEventsRequest), ((string) message_content_buffer).make_valid ((ssize_t) message_length)) as InsertEventsRequest;
 
             message_received (message);
 
