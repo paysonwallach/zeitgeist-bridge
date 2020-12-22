@@ -3,13 +3,18 @@
   "description": "Host bridge to Zeitgeist.",
   "license": "GPL-3.0",
   "author": "Payson Wallach <payson@paysonwallach.com>",
+  "homepage": "https://github.com/paysonwallach/zeitgeist-bridge#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paysonwallach/zeitgeist-bridge"
+  },
   "version": "0.1.0",
   "scripts": {
     "format": "run-p format:*",
     "format:js": "prettier --write .",
     "format:package.json": "prettier-package-json --write",
     "format:vala": "find . -name '*.vala' -exec uncrustify -c uncrustify.cfg --replace {} \\;",
-    "pre-release": "scrivano",
+    "prerelease": "scrivano",
     "release": "standard-version"
   },
   "devDependencies": {
@@ -28,9 +33,26 @@
       "pre-commit": "npm run format"
     }
   },
+  "meta": {
+    "title": "Zeitgeist Bridge",
+    "repository": {
+      "owner": "paysonwallach",
+      "name": "zeitgeist-bridge"
+    },
+    "license": {
+      "name": "GNU General Public License v3.0",
+      "url": "https://github.com/paysonwallach/zeitgeist-bridge/blob/master/LICENSE"
+    },
+    "codeOfConduct": {
+      "url": "https://github.com/paysonwallach/zeitgeist-bridge/blob/master/CODE_OF_CONDUCT.md"
+    },
+    "releases": {
+      "url": "https://github.com/paysonwallach/zeitgeist-bridge/releases"
+    }
+  },
   "standard-version": {
     "scripts": {
-      "precommit": "npm run pre-release"
+      "precommit": "npm run prerelease"
     }
   }
 }
