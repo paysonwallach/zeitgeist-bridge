@@ -33,7 +33,7 @@ meson --prefix=/usr build
 
 If you would like to use [Zeitgeist Bridge](https://github.com/paysonwallach/zeitgeist-bridge) with a browser extension, set the `browsers` option accordingly, and the appropriate manifests will be generated and installed in their respective locations. For example, with Firefox:
 
-```
+```shell
 meson --prefix=/usr -Dbrowsers=["firefox"] build
 ```
 
