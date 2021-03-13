@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "zeitgeist-bridge",
   "description": "Host bridge to Zeitgeist.",
   "license": "GPL-3.0",
