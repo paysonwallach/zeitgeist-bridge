@@ -11,11 +11,6 @@ vala = meson.get_compiler('vala')
 
 vapi_dir = join_paths(meson.source_root(), 'vapi')
 
-add_global_arguments(
-  ['-DG_LOG_DOMAIN="com.paysonwallach.zeitgeist.bridge"'],
-  language:'c'
-)
-
 gee_dep = dependency('gee-0.8')
 glib_dep = dependency('glib-2.0')
 glib_json_dep = dependency('json-glib-1.0')
@@ -35,6 +30,11 @@ output: 'config.h',
 config_dep = declare_dependency(
   dependencies: vala.find_library('config', dirs: vapi_dir),
   sources: config_h
+)
+
+add_project_arguments(
+  ['-DG_LOG_DOMAIN="@0@"'.format(meson.project_name())],
+  language:'c'
 )
 
 executable(
