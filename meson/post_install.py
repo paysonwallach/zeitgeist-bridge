@@ -7,7 +7,9 @@ import subprocess
 import sys
 
 EXECUTABLE_INSTALL_DIR = os.path.join(
-    os.environ["DESTDIR"], os.environ["MESON_INSTALL_PREFIX"], "bin"
+    os.environ.get("DESTDIR", ""),
+    os.environ.get("MESON_INSTALL_PREFIX", "usr"),
+    "bin",
 )
 EXECUTABLE_NAME = "com.paysonwallach.synapse.bridge"
 MANIFEST_FILE_NAME = "com.paysonwallach.synapse.json"
