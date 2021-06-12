@@ -54,7 +54,7 @@ namespace Zeitgeist.Bridge {
                 } catch (Error err) {
                     warning (err.message);
                 }
-                message ("inserting event...");
+                info ("inserting event...");
             });
         });
         extension.begin_listening.begin ();

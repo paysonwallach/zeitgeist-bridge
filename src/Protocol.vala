@@ -97,8 +97,7 @@ namespace Zeitgeist.Bridge {
                         subject.current_origin, subject.current_uri,
                         subject.interpretation, subject.manifestation,
                         subject.mimetype, subject.origin, subject.storage,
-                        subject.text, subject.uri)
-                    );
+                        subject.text, subject.uri));
                 });
 
             this (

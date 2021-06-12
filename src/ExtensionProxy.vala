@@ -33,8 +33,7 @@ private class Zeitgeist.Bridge.ExtensionProxy : Object {
             (message_length_buffer[3] << 24)
             + (message_length_buffer[2] << 16)
             + (message_length_buffer[1] << 8)
-            + (message_length_buffer[0])
-            );
+            + (message_length_buffer[0]));
     }
 
     private void message_content_read_cb (Object? object, AsyncResult result) {
