@@ -24,6 +24,12 @@ private class Zeitgeist.Bridge.ExtensionProxy : Object {
     public signal void message_received (InsertEventsRequest body);
 
     public ExtensionProxy () {
+        var registry = new Zeitgeist.DataSourceRegistry ();
+        var data_source = new Zeitgeist.DataSource.full (
+            Config.APPLICATION_ID,
+            Config.APPLICATION_NAME, Config.APPLICATION_DESCRIPTION, null);
+        registry.register_data_source.begin (data_source);
+
         var base_input_stream = new UnixInputStream (Posix.STDIN_FILENO, false);
         input_stream = new DataInputStream (base_input_stream);
     }

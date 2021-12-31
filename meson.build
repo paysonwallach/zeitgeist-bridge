@@ -3,7 +3,7 @@ project(
   'vala',
   'c',
   license: 'GPL-3.0',
-  meson_version: '>=0.55.0',
+  meson_version: '>=0.56.0',
   version: '0.1.0'
 )
 
@@ -20,6 +20,9 @@ zeitgeist_dep = dependency('zeitgeist-2.0')
 posix_dep = vala.find_library('posix')
 
 conf = configuration_data()
+conf.set_quoted('APPLICATION_ID', meson.project_name())
+conf.set_quoted('APPLICATION_NAME', run_command('sh', '-c', 'cat @0@ | jq -r ".name"'.format(join_paths(meson.project_source_root(), 'package.json'))).stdout().strip())
+conf.set_quoted('APPLICATION_DESCRIPTION', run_command('sh', '-c', 'cat @0@ | jq -r ".description"'.format(join_paths(meson.project_source_root(), 'package.json'))).stdout().strip())
 conf.set_quoted('API_VERSION', 'v2')
 
 config_h = configure_file(
