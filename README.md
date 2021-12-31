@@ -2,7 +2,7 @@
   <h1>Zeitgeist Bridge</h1>
   <p>Host bridge to Zeitgeist.</p>
   <a href="https://github.com/paysonwallach/zeitgeist-bridge/releases/latest">
-    <img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-red.svg?cacheSeconds=2592000&style=flat-square" />
+    <img alt="Version 0.2.0" src="https://img.shields.io/badge/version-0.2.0-red.svg?cacheSeconds=2592000&style=flat-square" />
   </a>
   <a href="https://github.com/paysonwallach/zeitgeist-bridge/blob/master/LICENSE" target="\_blank">
     <img alt="Licensed under the GNU General Public License v3.0" src="https://img.shields.io/github/license/paysonwallach/zeitgeist-bridge?style=flat-square" />
